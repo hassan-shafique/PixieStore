@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PixieStore.Data;
 using PixieStore.Models;
+using PixieStore.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,20 +19,21 @@ namespace PixieStore.Areas.Customer.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            return View(new HomeVM());
         }
 
         public IActionResult ContactUs()
         {
-            return View(new Contactus());
+            return View(new ContactusViewModel());
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ContactUs(Contactus contactus)
+        public async Task<IActionResult> ContactUs(ContactusViewModel contactusViewModel)
         {
             if (ModelState.IsValid)
             {
-                db.Contactus.Add(contactus);
+                contactusViewModel.Contactus.PublishedDate = DateTime.Now;
+                db.Contactus.Add(contactusViewModel.Contactus);
                 await db.SaveChangesAsync();
                 return View();
             }

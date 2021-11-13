@@ -1,4 +1,4 @@
-﻿
+﻿@model PixieStore.ViewModels.ProductsMainVM
 @{
     ViewData["Title"] = "Index";
 }
@@ -30,19 +30,31 @@
 
     <div class="row posts">
         <div id="1" class="item new col-md-4">
-            <a href="single-product.html">
+            <a >
                 <div class="featured-item">
-                    <img src="assets/images/product-01.jpg" alt="">
+                    <img src="~/customer/images/product-01.jpg" alt="">
                     <h4>Proin vel ligula</h4>
                     <h6>$15.00</h6>
                 </div>
             </a>
         </div>
+        @foreach (var item in Model.Products)
+        {
+            <div id="2" class="item high col-md-4">
+                <a href="single-product.html">
+                    <div class="featured-item">
+                        <img src="~/customer/images/product-02.jpg" alt="">
+                        <h4>@item.Name</h4>
+                        <h6>@item.Price</h6>
+                    </div>
+                </a>
+            </div>
+        }
         <div id="2" class="item high col-md-4">
             <a href="single-product.html">
                 <div class="featured-item">
-                    <img src="assets/images/product-02.jpg" alt="">
-                    <h4>Erat odio rhoncus</h4>
+                    <img src="~/customer/images/product-02.jpg" alt="">
+                    <h4></h4>
                     <h6>$25.00</h6>
                 </div>
             </a>
@@ -50,7 +62,7 @@
         <div id="3" class="item low col-md-4">
             <a href="single-product.html">
                 <div class="featured-item">
-                    <img src="assets/images/product-03.jpg" alt="">
+                    <img src="~/customer/images/product-03.jpg" alt="">
                     <h4>Integer vel turpis</h4>
                     <h6>$35.00</h6>
                 </div>
@@ -59,7 +71,7 @@
         <div id="4" class="item low col-md-4">
             <a href="single-product.html">
                 <div class="featured-item">
-                    <img src="assets/images/product-04.jpg" alt="">
+                    <img src="~/customer/images/product-04.jpg" alt="">
                     <h4>Sed purus quam</h4>
                     <h6>$45.00</h6>
                 </div>
@@ -68,7 +80,7 @@
         <div id="5" class="item new high col-md-4">
             <a href="single-product.html">
                 <div class="featured-item">
-                    <img src="assets/images/product-05.jpg" alt="">
+                    <img src="~/customer/images/product-05.jpg" alt="">
                     <h4>Morbi aliquet</h4>
                     <h6>$55.00</h6>
                 </div>
@@ -86,7 +98,7 @@
         <div id="7" class="item new high col-md-4">
             <a href="single-product.html">
                 <div class="featured-item">
-                    <img src="assets/images/product-03.jpg" alt="">
+                    <img src="~/customer/images/product-03.jpg" alt="">
                     <h4>Proin eget imperdiet</h4>
                     <h6>$75.00</h6>
                 </div>
@@ -95,7 +107,7 @@
         <div id="8" class="item low new col-md-4">
             <a href="single-product.html">
                 <div class="featured-item">
-                    <img src="assets/images/product-02.jpg" alt="">
+                    <img src="~/customer/images/product-02.jpg" alt="">
                     <h4>Nullam risus nisl</h4>
                     <h6>$85.00</h6>
                 </div>
@@ -104,7 +116,7 @@
         <div id="9" class="item new col-md-4">
             <a href="single-product.html">
                 <div class="featured-item">
-                    <img src="assets/images/product-01.jpg" alt="">
+                    <img src="~/customer/images/product-01.jpg" alt="">
                     <h4>Cras tempus</h4>
                     <h6>$95.00</h6>
                 </div>
@@ -129,14 +141,68 @@
 </div>
 <!-- Featred Page Ends Here -->
 
+
+@section Subscribe{
+    <!-- Subscribe Form Starts Here -->
+    <div class="subscribe-form">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="section-heading">
+                        <div class="line-dec"></div>
+                        <h1>Subscribe on PIXIE now!</h1>
+                    </div>
+                </div>
+                <div class="col-md-8 offset-md-2">
+                    <div class="main-content">
+                        <p>Integer vel turpis ultricies, lacinia ligula id, lobortis augue. Vivamus porttitor dui id dictum efficitur. Phasellus vel interdum elit.</p>
+                        <div class="container">
+                            @using (Html.BeginForm("Add_Subscriber", "Home", FormMethod.Post))
+                            {
+                                <div class="row">
+                                    <div class="col-md-7">
+                                        <fieldset>
+                                            @Html.TextBoxFor(m => m.subscriber.S_Email, new
+                                       {
+                                           @class = "form-control",
+                                           @id = "email",
+                                           @onfocus = "if(this.value == 'Your Email...') { this.value = ''; }",
+                                           @onBlur = "if(this.value == '') { this.value = 'Your Email...';}",
+                                           @value = "Your Email...",
+                                           @required = "required"
+                                       })
+                                            @*                                            <input name="email" type="text" class="form-control" id="email"
+                                                onfocus="if(this.value == 'Your Email...') { this.value = ''; }"
+                                                onBlur="if(this.value == '') { this.value = 'Your Email...';}"
+                                                value="Your Email..." required="">*@
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <fieldset>
+                                            <button type="submit" id="form-submit" class="button">Subscribe Now!</button>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                            }
+                            @*<form id="subscribe" method="post">
+                                </form>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
 @section Scripts{
     <script language="text/Javascript">
         cleared[0] = cleared[1] = cleared[2] = 0; //set a cleared flag for each field
-        function clearField(t){                   //declaring the array outside of the
-        if(! cleared[t.id]){                      // function makes it static and global
-            cleared[t.id] = 1;  // you could use true and false, but that's more typing
-            t.value='';         // with more chance of typos
-            t.style.color='#fff';
+        function clearField(t) {                   //declaring the array outside of the
+            if (!cleared[t.id]) {                      // function makes it static and global
+                cleared[t.id] = 1;  // you could use true and false, but that's more typing
+                t.value = '';         // with more chance of typos
+                t.style.color = '#fff';
             }
         }
     </script>

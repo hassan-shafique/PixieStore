@@ -18,5 +18,7 @@ namespace PixieStore.Data
         public DbSet<PixieStore.Models.Subscriber> Subscriber { get; set; }
         public DbSet<PixieStore.Models.ProductTag> ProductTag { get; set; }
         public DbSet<PixieStore.Models.productCategory> productCategory { get; set; }
+        public DbSet<PixieStore.Models.Products> Products{ get; set; }
+        
     }
 }
