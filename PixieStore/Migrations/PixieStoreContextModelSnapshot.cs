@@ -73,45 +73,6 @@ namespace PixieStore.Migrations
                     b.ToTable("ProductTag");
                 });
 
-            modelBuilder.Entity("PixieStore.Models.Products", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Image")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsAvailable")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("ProducTagsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductCategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ProductColor")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("ProductTagsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductTagsId");
-
-                    b.ToTable("Products");
-                });
-
             modelBuilder.Entity("PixieStore.Models.Subscriber", b =>
                 {
                     b.Property<int>("Id")
@@ -143,9 +104,6 @@ namespace PixieStore.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<int?>("ProductCategoryId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Product_CatName")
                         .IsRequired()
                         .HasMaxLength(32)
@@ -159,30 +117,7 @@ namespace PixieStore.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProductCategoryId");
-
                     b.ToTable("productCategory");
-                });
-
-            modelBuilder.Entity("PixieStore.Models.Products", b =>
-                {
-                    b.HasOne("PixieStore.Models.ProductTag", "ProductTag")
-                        .WithMany()
-                        .HasForeignKey("ProductTagsId");
-
-                    b.Navigation("ProductTag");
-                });
-
-            modelBuilder.Entity("PixieStore.Models.productCategory", b =>
-                {
-                    b.HasOne("PixieStore.Models.Products", null)
-                        .WithMany("ProductCategory")
-                        .HasForeignKey("ProductCategoryId");
-                });
-
-            modelBuilder.Entity("PixieStore.Models.Products", b =>
-                {
-                    b.Navigation("ProductCategory");
                 });
 #pragma warning restore 612, 618
         }

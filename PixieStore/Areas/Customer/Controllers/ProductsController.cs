@@ -1,8 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using PixieStore.Data;
-using PixieStore.Models;
-using PixieStore.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,19 +7,16 @@ using System.Threading.Tasks;
 
 namespace PixieStore.Areas.Customer.Controllers
 {
-    [Area("Customer")]
     public class ProductsController : Controller
     {
         private readonly PixieStoreContext db;
         public ProductsController(PixieStoreContext _db)
         {
-            db = _db;
+            _db = _db;
         }
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var vm = new ProductsMainVM();
-            vm.Products = await db.Products.ToListAsync();
-            return View(vm);
+            return View();
         }
         public async Task<IActionResult> SingleProduct(int? id)
         {
@@ -32,15 +26,15 @@ namespace PixieStore.Areas.Customer.Controllers
             }
             else
             {
-                var product = db.Products.Find(id);
-                if (product == null)
-                {
-                    return NotFound();
-                }
-                var vm = new SingleProductsVM();
-                vm.Products = product;
-                return View(vm);
+                //Pending
+                //It will be completed.
+                //once the Product Model class is created.
+                //To create product I have to create
+                //Tags, Catagories etc.
+                //as well as its variations
+//                var product = 
             }
+            return View();
         }
     }
 }
